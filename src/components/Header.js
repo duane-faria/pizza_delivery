@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import metrics from '../styles/metrics';
+import * as util from '../styles/util';
 import pizzaImage from '../assets/images/pizza-short.png';
 import shoppingBag from '../assets/images/shopping-bag.png';
 
@@ -27,28 +28,11 @@ function Header() {
 
 export default Header;
 
-// css mixin
-const hand = css`
-  cursor: pointer;
-`;
-const flexRowCenter = css`
-  display: flex;
-  justify-content: center;
-`;
-const flexColCenter = css`
-  display: flex;
-  align-items: center;
-`;
-const flexCenterAll = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const HeaderLayout = styled.header`
   height: 80px;
-  ${flexRowCenter}
+  ${util.flexRowCenter}
   flex: 1;
+  flex-grow: 0;
   background: #0b2031;
 `;
 
@@ -64,7 +48,7 @@ const Logo = styled.div`
     width: 45px;
     margin-right: 10px;
   }
-  ${flexColCenter}
+  ${util.flexColCenter}
   h1 {
     color: #ffffff;
     font-size: 18px;
@@ -73,7 +57,7 @@ const Logo = styled.div`
 
 const UserInfo = styled.div`
   color: #ffffff;
-  ${flexCenterAll}
+  ${util.flexCenterAll}
   div {
     display: flex;
     flex-direction: column;
@@ -88,7 +72,7 @@ const Logout = styled.span`
   text-align: right;
   margin-top: 5px;
   &:hover {
-    ${hand}
+    ${util.hand}
   }
 `;
 
@@ -107,5 +91,5 @@ const CicleBuy = styled.div`
   background: #e5293e url(${shoppingBag}) no-repeat 10px 10px;
   background-size: 18px;
   margin-left: 20px;
-  ${hand}
+  ${util.hand}
 `;
