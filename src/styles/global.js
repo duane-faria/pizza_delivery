@@ -20,7 +20,7 @@ const global = createGlobalStyle`
     outline: 0;
     border:unset;
   }
-
+  
 `;
 
 export default global;

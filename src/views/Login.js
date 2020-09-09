@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import bg from '../assets/images/login-bg.png';
 import shotPizza from '../assets/images/pizza-short.png';
-import { TextField } from '@material-ui/core';
-
+import metrics from '../styles/metrics';
 function views() {
   return (
     <Wrapper>
@@ -35,7 +34,7 @@ const Wrapper = styled.section`
 `;
 
 const Container = styled.div`
-  max-width: 1175px;
+  max-width: ${metrics.container};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,13 +54,16 @@ const Form = styled.form`
   }
 
   button {
-    background: tomato;
+    background: #e5293e;
     color: #fff;
     height: 45px;
     border-radius: 5px;
     &:hover {
       cursor: pointer;
     }
+    font-size: 15px;
+    color: #ffffff;
+    letter-spacing: 0;
   }
 `;
 
