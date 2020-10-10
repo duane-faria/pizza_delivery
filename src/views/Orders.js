@@ -21,6 +21,20 @@ function Orders() {
         },
       ],
     },
+    {
+      client: 'Gabriel Souza',
+      time: 'há 6 minutos',
+      observations: 'Favor remover azeitonas',
+      price: 25.69,
+      orders: [
+        {
+          type: 'pizza',
+          name: 'Pizza de queijo',
+          imageUrl: '1.png',
+          size: 'Média',
+        },
+      ],
+    },
   ]);
 
   return (
@@ -32,7 +46,13 @@ function Orders() {
             <h2>Últimos pedidos</h2>
           </Title>
           {orders.map((order, index) => {
-            return <OrderCard order={order} index={index} key={index} />;
+            return (
+              <OrderCard
+                order={order}
+                index={index}
+                key={index + Math.random()}
+              />
+            );
           })}
         </Content>
       </Container>
@@ -45,20 +65,21 @@ export default Orders;
 const Container = styled.div`
   height: 100%;
 `;
+
 const Content = styled.div`
   height: 100%;
   padding-top: 35px;
 `;
 
 const Title = styled.div`
-    display: block;
-    margin: 0 auto;
-    max-width: 650px;
-    margin-bottom: 15px;
-    h2 {
-      font-family: 'Helvetica';
-      font-size: 18px;
-      color: #333333;
-      text-align: left;
-    }
+  display: block;
+  margin: 0 auto;
+  max-width: 650px;
+  margin-bottom: 15px;
+  h2 {
+    font-family: 'Helvetica';
+    font-size: 18px;
+    color: #333333;
+    text-align: left;
+  }
 `;

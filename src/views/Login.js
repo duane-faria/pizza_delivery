@@ -27,8 +27,8 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   img {
-    max-width: 70px;
-    max-height: 70px;
+    width: 90px;
+    height: 90px;
     margin-bottom: 10px;
   }
 `;

@@ -10,13 +10,13 @@ function OrderCard({ order, index }) {
           Pedido <span>#{index + 1}</span> - {order.client}
         </OrderTitle>
         <Time>{order.time}</Time>
-        <OrderPrice>R${order.price}</OrderPrice>
+        <OrderPrice>R$ {order.price}</OrderPrice>
       </Header>
       <Line />
       <Orders>
-        {order.orders.map((o) => {
+        {order.orders.map((o, i) => {
           return (
-            <OrderBox>
+            <OrderBox key={i}>
               <img src={image1} alt='Pizza' />
               <div>
                 <h4>{o.name}</h4>
@@ -50,6 +50,20 @@ const Container = styled.div`
   background: white;
   border-radius: 5px;
   padding: 1.5rem;
+  margin-bottom: 1rem;
+  animation: entrance 0.3s forwards;
+
+  @keyframes entrance {
+    from {
+      opacity: 0;
+      transform: translateX(-150px);
+    }
+
+    to {
+      opacity: initial;
+      transform: initial;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -85,11 +99,11 @@ const OrderBox = styled.div`
   border-radius: 5px;
   display: flex;
   align-items: center;
-  
+
   img {
     max-height: 100%;
   }
-  
+
   div {
     margin-left: 10px;
     h4 {
