@@ -11,7 +11,7 @@ function Header() {
       <Container>
         <Logo>
           <img src={pizzaImage} alt='pizza logo' />
-          <h1>Pizzaria do Dudu</h1>
+          <h1>Pizza delivery</h1>
         </Logo>
         <UserInfo>
           <div>

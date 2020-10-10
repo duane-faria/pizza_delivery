@@ -6,15 +6,34 @@ import metrics from '../styles/metrics';
 import * as util from '../styles/util';
 
 function Orders() {
+  const [orders, setOrders] = React.useState([
+    {
+      client: 'Duane Faria',
+      time: 'há 2 minutos',
+      observations: 'Colocar tomate extra',
+      price: 50,
+      orders: [
+        {
+          type: 'pizza',
+          name: 'Pizza de queijo',
+          imageUrl: '1.png',
+          size: 'Média',
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
       <Container>
         <Header />
         <Content>
-          <div>
+          <Title>
             <h2>Últimos pedidos</h2>
-          </div>
-          <OrderCard />
+          </Title>
+          {orders.map((order, index) => {
+            return <OrderCard order={order} index={index} key={index} />;
+          })}
         </Content>
       </Container>
     </>
@@ -29,7 +48,9 @@ const Container = styled.div`
 const Content = styled.div`
   height: 100%;
   padding-top: 35px;
-  div {
+`;
+
+const Title = styled.div`
     display: block;
     margin: 0 auto;
     max-width: 650px;
@@ -40,5 +61,4 @@ const Content = styled.div`
       color: #333333;
       text-align: left;
     }
-  }
 `;
