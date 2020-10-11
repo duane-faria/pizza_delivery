@@ -6,6 +6,17 @@ import pizzaImage from '../assets/images/pizza-short.png';
 import shoppingBag from '../assets/images/shopping-bag.png';
 
 function Header() {
+  const [mobile, setMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    function isMobile() {
+      const { matches } = window.matchMedia('(max-width:40rem)');
+      setMobile(matches);
+    }
+    window.addEventListener('resize', isMobile);
+    isMobile();
+  }, []);
+
   return (
     <HeaderLayout>
       <Container>
@@ -18,8 +29,12 @@ function Header() {
             <span>Duane Faria</span>
             <Logout>Sair do app</Logout>
           </div>
-          <LitleBar />
-          <CicleBuy />
+          {!mobile && (
+            <>
+              <LitleBar />
+              <CicleBuy />
+            </>
+          )}
         </UserInfo>
       </Container>
     </HeaderLayout>
@@ -40,6 +55,7 @@ const Container = styled.div`
   width: ${metrics.container};
   display: flex;
   justify-content: space-between;
+  padding: 0 1rem;
 `;
 
 const Logo = styled.div`
@@ -51,7 +67,7 @@ const Logo = styled.div`
   ${util.flexColCenter}
   h1 {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 1rem;
   }
 `;
 

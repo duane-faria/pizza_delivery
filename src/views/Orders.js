@@ -39,8 +39,8 @@ function Orders() {
 
   return (
     <>
+      <Header />
       <Container>
-        <Header />
         <Content>
           <Title>
             <h2>Últimos pedidos</h2>
@@ -64,6 +64,7 @@ export default Orders;
 
 const Container = styled.div`
   height: 100%;
+  padding: 1rem;
 `;
 
 const Content = styled.div`
