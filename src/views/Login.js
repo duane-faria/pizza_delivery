@@ -4,11 +4,15 @@ import bg from '../assets/images/login-bg.png';
 import shotPizza from '../assets/images/pizza-short.png';
 import metrics from '../styles/metrics';
 function views() {
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <Wrapper>
       <Container>
         <img src={shotPizza} alt='Pequena pizza' />
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <input type='email' placeholder='Seu e-mail' />
           <input type='password' placeholder='Senha secreta' />
           <button>Entrar</button>
@@ -51,6 +55,12 @@ const Form = styled.form`
     margin-bottom: 10px;
     height: 45px;
     padding-left: 10px;
+    &:hover,
+    &:focus {
+      border: 1px solid #e5293e;
+      box-shadow: 0 0 0 3px rgba(229, 41, 62,.35);
+      outline:none;
+    }
   }
 
   button {
@@ -60,6 +70,7 @@ const Form = styled.form`
     border-radius: 5px;
     &:hover {
       cursor: pointer;
+      background:#ab1425;
     }
     font-size: 15px;
     color: #ffffff;

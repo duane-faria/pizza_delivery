@@ -144,7 +144,7 @@ const Observations = styled.div`
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background: #f8f9fa;
+  background: #F2EEEE;
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
 `;
