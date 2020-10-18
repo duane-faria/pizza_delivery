@@ -1,11 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import Header from '../components/Header';
 import OrderCard from '../components/OrderCard';
 import metrics from '../styles/metrics';
 import * as util from '../styles/util';
+import Creators from '../store/ducks/Order';
 
-function Orders() {
+function Orders({ dispatch }) {
+  React.useEffect(() => {
+    dispatch(Creators.loadRequest());
+  }, [dispatch]);
+
   const [orders, setOrders] = React.useState([
     {
       client: 'Duane Faria',
@@ -60,7 +66,11 @@ function Orders() {
   );
 }
 
-export default Orders;
+const mapStateToProps = (state) => ({
+  order: state.Order,
+});
+
+export default connect(mapStateToProps)(Orders);
 
 const Container = styled.div`
   height: 100%;
