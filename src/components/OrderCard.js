@@ -94,7 +94,7 @@ const Time = styled.small`
 const OrderBox = styled.div`
   height: 80px;
   width: 200px;
-  border: 1px solid #f8f9fa;
+  border: 1px solid #F2EEEE;
   padding: 1rem;
   border-radius: 5px;
   display: flex;
