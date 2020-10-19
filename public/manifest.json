@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pizza Delivery",
+  "name": "Pizza Delivery - App para compra de produtos de pizzaria.",
   "icons": [
     {
       "src": "favicon.ico",
