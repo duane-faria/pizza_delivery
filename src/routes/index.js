@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Login from './views/Login';
-import Orders from './views/Orders';
+import Login from '../views/Login';
+import Orders from '../views/Orders';
 function routes() {
   return (
     <Switch>

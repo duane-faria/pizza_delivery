@@ -1,15 +1,34 @@
 import React from 'react';
+import { differenceInHours, differenceInMinutes, parseISO } from 'date-fns';
 import styled, { css } from 'styled-components';
 import image1 from '../assets/images/1.png';
 
 function OrderCard({ order, index }) {
+  function formatOrderDate(date) {
+    let diffminutes = differenceInMinutes(
+      parseISO(new Date().toISOString()),
+      new Date(date)
+    );
+    if (diffminutes > 1440) {
+      let days = Math.round(diffminutes / 60 / 24);
+      let end = days > 1 ? ' dias' : ' dia';
+      return 'há ' + days + end;
+    } else if (diffminutes > 60) {
+      let hours = Math.round(diffminutes / 60);
+      let end = hours > 1 ? ' horas' : ' hora';
+      return 'há ' + hours + end;
+    } else {
+      return 'há ' + diffminutes + ' minutos';
+    }
+  }
+
   return (
     <Container>
       <Header>
         <OrderTitle>
           Pedido <span>#{index + 1}</span> - {order.user.name}
         </OrderTitle>
-        <Time>{order.createdAt}</Time>
+        <Time>{formatOrderDate(order.createdAt)}</Time>
         <OrderPrice>R$ {order.price}</OrderPrice>
       </Header>
       <Line />
@@ -94,7 +113,7 @@ const Time = styled.small`
 const OrderBox = styled.div`
   height: 80px;
   width: 200px;
-  border: 1px solid #F2EEEE;
+  border: 1px solid #f2eeee;
   padding: 1rem;
   border-radius: 5px;
   display: flex;
@@ -138,13 +157,13 @@ const Observations = styled.div`
   color: #706e7b;
   letter-spacing: 0;
   text-align: left;
-  padding-top:5px;
+  padding-top: 5px;
 `;
 
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background: #F2EEEE;
+  background: #f2eeee;
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
 `;

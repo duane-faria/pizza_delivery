@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import Header from '../components/Header';
 import OrderCard from '../components/OrderCard';
-import metrics from '../styles/metrics';
-import * as util from '../styles/util';
 import Creators from '../store/ducks/Order';
 
 function Orders({ dispatch, order }) {
@@ -14,7 +12,7 @@ function Orders({ dispatch, order }) {
     }
     data();
   }, [dispatch]);
-  
+
   const [orders, setOrders] = React.useState([
     {
       client: 'Duane Faria',
@@ -54,15 +52,12 @@ function Orders({ dispatch, order }) {
           <Title>
             <h2>Últimos pedidos</h2>
           </Title>
-          {order.data && order.data.map((orderr, index) => {
-            return (
-              <OrderCard
-                order={orderr}
-                index={index}
-                key={orderr._id}
-              />
-            );
-          })}
+          {order.data &&
+            order.data.map((orderr, index) => {
+              return (
+                <OrderCard order={orderr} index={index} key={orderr._id} />
+              );
+            })}
         </Content>
       </Container>
     </>
