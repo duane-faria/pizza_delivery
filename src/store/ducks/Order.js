@@ -16,5 +16,5 @@ export const INITIAL_STATE = Immutable({
 });
 
 export const reducers = createReducer(INITIAL_STATE, {
-  // [Types.loadSuccess]: (state, { data }) => state.merge({ data }),
+  [Types.LOAD_SUCCESS]: (state, { data }) =>  state.merge({ data }),
 });

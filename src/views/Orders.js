@@ -7,11 +7,14 @@ import metrics from '../styles/metrics';
 import * as util from '../styles/util';
 import Creators from '../store/ducks/Order';
 
-function Orders({ dispatch }) {
+function Orders({ dispatch, order }) {
   React.useEffect(() => {
-    dispatch(Creators.loadRequest());
+    async function data() {
+      await dispatch(Creators.loadRequest());
+    }
+    data();
   }, [dispatch]);
-
+  
   const [orders, setOrders] = React.useState([
     {
       client: 'Duane Faria',
@@ -51,12 +54,12 @@ function Orders({ dispatch }) {
           <Title>
             <h2>Últimos pedidos</h2>
           </Title>
-          {orders.map((order, index) => {
+          {order.data && order.data.map((orderr, index) => {
             return (
               <OrderCard
-                order={order}
+                order={orderr}
                 index={index}
-                key={index + Math.random()}
+                key={orderr._id}
               />
             );
           })}

@@ -1,8 +1,8 @@
-import {call, put} from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 
-import OrderActios from '~/store/ducks/Order';
+import OrderActios from '../../store/ducks/Order';
 
-import api from '~/services/api';
+import api from '../../services/api';
 
 export function* load() {
   try {

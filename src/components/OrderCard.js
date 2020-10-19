@@ -7,14 +7,14 @@ function OrderCard({ order, index }) {
     <Container>
       <Header>
         <OrderTitle>
-          Pedido <span>#{index + 1}</span> - {order.client}
+          Pedido <span>#{index + 1}</span> - {order.user.name}
         </OrderTitle>
-        <Time>{order.time}</Time>
+        <Time>{order.createdAt}</Time>
         <OrderPrice>R$ {order.price}</OrderPrice>
       </Header>
       <Line />
       <Orders>
-        {order.orders.map((o, i) => {
+        {order.items.map((o, i) => {
           return (
             <OrderBox key={i}>
               <img src={image1} alt='Pizza' />
@@ -27,7 +27,7 @@ function OrderCard({ order, index }) {
         })}
       </Orders>
       <Line />
-      <Observations>Observações: {order.observations}</Observations>
+      <Observations>Observações: {order.note}</Observations>
     </Container>
   );
 }
@@ -130,7 +130,6 @@ const OrderPrice = styled.h4`
   letter-spacing: 0;
   font-weight: bold;
   margin-top: 0.3rem;
-  /* margin-bottom: 0.3rem; */
 `;
 
 const Observations = styled.div`
@@ -139,6 +138,7 @@ const Observations = styled.div`
   color: #706e7b;
   letter-spacing: 0;
   text-align: left;
+  padding-top:5px;
 `;
 
 const Line = styled.div`
