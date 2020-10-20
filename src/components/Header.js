@@ -4,6 +4,7 @@ import metrics from '../styles/metrics';
 import * as util from '../styles/util';
 import pizzaImage from '../assets/images/pizza-short.png';
 import shoppingBag from '../assets/images/shopping-bag.png';
+import { logOut } from '../services/auth';
 
 function Header() {
   const [mobile, setMobile] = React.useState(false);
@@ -16,11 +17,7 @@ function Header() {
     window.addEventListener('resize', isMobile);
     isMobile();
   }, []);
-  function logout() {
-    localStorage.removeItem('persist:rootPizzaDelivery');
-    /*eslint-disable*/
-    location.reload(); 
-  }
+  
   return (
     <HeaderLayout>
       <Container>
@@ -31,7 +28,7 @@ function Header() {
         <UserInfo>
           <div>
             <span>Duane Faria</span>
-            <Logout onClick={logout}>Sair do app</Logout>
+            <Logout onClick={logOut}>Sair do app</Logout>
           </div>
           {!mobile && (
             <>
