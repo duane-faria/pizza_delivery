@@ -38,8 +38,15 @@ function OrderCard({ order, index }) {
             <OrderBox key={i}>
               <img src={image1} alt='Pizza' />
               <div>
-                <h4>{o.name}</h4>
-                <small>Tamanho {o.size}</small>
+                <h4>
+                  {o.product.name.toLowerCase() == 'pizza'
+                    ? o.product.name + ' de '
+                    : o.product.name}
+                    {
+                      o.productType.name
+                    }
+                </h4>
+                <small>Tamanho {o.productSize.name}</small>
               </div>
             </OrderBox>
           );
@@ -112,7 +119,7 @@ const Time = styled.small`
 
 const OrderBox = styled.div`
   height: 80px;
-  width: 200px;
+  width: 210px;
   border: 1px solid #f2eeee;
   padding: 1rem;
   border-radius: 5px;
