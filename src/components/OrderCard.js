@@ -1,9 +1,24 @@
 import React from 'react';
-import { differenceInHours, differenceInMinutes, parseISO } from 'date-fns';
+import { differenceInMinutes, parseISO } from 'date-fns';
 import styled, { css } from 'styled-components';
-import image1 from '../assets/images/1.png';
+import calabresa from '../assets/images/calabresa.png';
+import pepperoni from '../assets/images/pepperoni.png';
+import atum from '../assets/images/atum.png';
+import queijo from '../assets/images/queijo.png';
+import portuguesa from '../assets/images/portuguesa.png';
+import brocolis from '../assets/images/brocolis.png';
 
 function OrderCard({ order, index }) {
+  
+  const images = {
+    calabresa,
+    pepperoni,
+    atum,
+    queijo,
+    portuguesa,
+    brocolis
+  }
+
   function formatOrderDate(date) {
     let diffminutes = differenceInMinutes(
       parseISO(new Date().toISOString()),
@@ -34,9 +49,10 @@ function OrderCard({ order, index }) {
       <Line />
       <Orders>
         {order.items.map((o, i) => {
+          
           return (
             <OrderBox key={i}>
-              <img src={image1} alt='Pizza' />
+              <img src={images[o.productType.name.toLowerCase()]} alt='Pizza' />
               <div>
                 <h4>
                   {o.product.name.toLowerCase() == 'pizza'

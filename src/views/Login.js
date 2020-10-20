@@ -3,9 +3,23 @@ import styled from 'styled-components';
 import bg from '../assets/images/login-bg.png';
 import shotPizza from '../assets/images/pizza-short.png';
 import metrics from '../styles/metrics';
-function views() {
-  function handleSubmit(e) {
+import AuthActions from '../store/ducks/Auth';
+import { connect } from 'react-redux';
+import { Redirect, useHistory } from 'react-router-dom';
+
+function Login(props) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const nav = useHistory();
+  async function handleSubmit(e) {
     e.preventDefault();
+    await props.dispatch(
+      AuthActions.loginRequest({
+        email,
+        password,
+      })
+    );
+    props.history.push('/pedidos');
   }
 
   return (
@@ -13,14 +27,30 @@ function views() {
       <Container>
         <img src={shotPizza} alt='Pequena pizza' />
         <Form onSubmit={handleSubmit}>
-          <input type='email' placeholder='Seu e-mail' />
-          <input type='password' placeholder='Senha secreta' />
+          <input
+            type='email'
+            placeholder='Seu e-mail'
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+          />
+          <input
+            type='password'
+            placeholder='Senha secreta'
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
           <button>Entrar</button>
         </Form>
       </Container>
     </Wrapper>
   );
 }
+
+const mapStateToProps = (state) => ({
+  Auth: state.Auth,
+});
+
+export default connect(mapStateToProps)(Login);
 
 const Wrapper = styled.section`
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url(${bg});
@@ -58,8 +88,8 @@ const Form = styled.form`
     &:hover,
     &:focus {
       border: 1px solid #e5293e;
-      box-shadow: 0 0 0 3px rgba(229, 41, 62,.35);
-      outline:none;
+      box-shadow: 0 0 0 3px rgba(229, 41, 62, 0.35);
+      outline: none;
     }
   }
 
@@ -70,12 +100,10 @@ const Form = styled.form`
     border-radius: 5px;
     &:hover {
       cursor: pointer;
-      background:#ab1425;
+      background: #ab1425;
     }
     font-size: 15px;
     color: #ffffff;
     letter-spacing: 0;
   }
 `;
-
-export default views;

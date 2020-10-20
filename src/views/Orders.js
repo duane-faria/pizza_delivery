@@ -3,46 +3,15 @@ import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import Header from '../components/Header';
 import OrderCard from '../components/OrderCard';
-import Creators from '../store/ducks/Order';
+import OrderActions from '../store/ducks/Order';
 
 function Orders({ dispatch, order }) {
   React.useEffect(() => {
     async function data() {
-      await dispatch(Creators.loadRequest());
+      await dispatch(OrderActions.loadRequest());
     }
     data();
   }, [dispatch]);
-
-  const [orders, setOrders] = React.useState([
-    {
-      client: 'Duane Faria',
-      time: 'há 2 minutos',
-      observations: 'Colocar tomate extra',
-      price: 50,
-      orders: [
-        {
-          type: 'pizza',
-          name: 'Pizza de queijo',
-          imageUrl: '1.png',
-          size: 'Média',
-        },
-      ],
-    },
-    {
-      client: 'Gabriel Souza',
-      time: 'há 6 minutos',
-      observations: 'Favor remover azeitonas',
-      price: 25.69,
-      orders: [
-        {
-          type: 'pizza',
-          name: 'Pizza de queijo',
-          imageUrl: '1.png',
-          size: 'Média',
-        },
-      ],
-    },
-  ]);
 
   return (
     <>

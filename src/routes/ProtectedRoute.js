@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function ProtectedRoute(props) {
+function ProtectedRoute(props) {
   const login = true;
   if (login) {
     return <Route {...props} />;
@@ -9,3 +10,9 @@ export default function ProtectedRoute(props) {
     return <Redirect to='/' />;
   }
 }
+
+const mapStateToProps = (state) => ({
+  Auth: state.Auth,
+});
+
+export default connect(mapStateToProps)(ProtectedRoute);

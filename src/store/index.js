@@ -10,7 +10,7 @@ import sagas from './sagas';
 const persistConfig = {
   key: 'rootPizzaDelivery',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['Auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

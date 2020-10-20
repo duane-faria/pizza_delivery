@@ -16,7 +16,11 @@ function Header() {
     window.addEventListener('resize', isMobile);
     isMobile();
   }, []);
-
+  function logout() {
+    localStorage.removeItem('persist:rootPizzaDelivery');
+    /*eslint-disable*/
+    location.reload(); 
+  }
   return (
     <HeaderLayout>
       <Container>
@@ -27,7 +31,7 @@ function Header() {
         <UserInfo>
           <div>
             <span>Duane Faria</span>
-            <Logout>Sair do app</Logout>
+            <Logout onClick={logout}>Sair do app</Logout>
           </div>
           {!mobile && (
             <>
