@@ -21,8 +21,8 @@ function Orders({ dispatch, order }) {
           <Title>
             <h2>Últimos pedidos</h2>
           </Title>
-          {order.data &&
-            order.data.map((orderr, index) => {
+          {order.data.docs &&
+            order.data.docs.map((orderr, index) => {
               return (
                 <OrderCard order={orderr} index={index} key={orderr._id} />
               );
