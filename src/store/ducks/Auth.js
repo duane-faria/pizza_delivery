@@ -2,9 +2,10 @@ import { createReducer, createActions } from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 
 const { Types, Creators } = createActions({
-  loginRequest: ['credentials'], // LOAD_REQUEST
+  loginRequest: ['credentials'],
   loginSuccess: ['data'],
   loadFailure: null,
+  logout: null,
 });
 
 export const AuthTypes = Types;
@@ -19,12 +20,18 @@ export const INITIAL_STATE = Immutable({
 });
 
 export const reducers = createReducer(INITIAL_STATE, {
-  [Types.LOGIN_SUCCESS]: (state, {data}) => {
-    return state.merge({
+  [Types.LOGIN_SUCCESS]: (state, { data }) =>
+    state.merge({
       token: data.token,
       id: data.user.id,
       name: data.user.name,
       email: data.user.email,
-    });
-  },
+    }),
+  [Types.LOGOUT]: (state) =>
+    state.merge({
+      token: '',
+      id: '',
+      name: '',
+      email: '',
+    }),
 });

@@ -5,45 +5,47 @@ import shotPizza from '../assets/images/pizza-short.png';
 import metrics from '../styles/metrics';
 import AuthActions from '../store/ducks/Auth';
 import { connect } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { getToken } from '../services/auth';
 
 function Login(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const nav = useHistory();
+
   async function handleSubmit(e) {
     e.preventDefault();
-    await props.dispatch(
+    props.dispatch(
       AuthActions.loginRequest({
         email,
         password,
       })
     );
-    props.history.push('/pedidos');
   }
 
-  return (
-    <Wrapper>
-      <Container>
-        <img src={shotPizza} alt='Pequena pizza' />
-        <Form onSubmit={handleSubmit}>
-          <input
-            type='email'
-            placeholder='Seu e-mail'
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-          />
-          <input
-            type='password'
-            placeholder='Senha secreta'
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
-          <button>Entrar</button>
-        </Form>
-      </Container>
-    </Wrapper>
-  );
+  if (getToken()) return <Redirect to='/pedidos' />;
+  else
+    return (
+      <Wrapper>
+        <Container>
+          <img src={shotPizza} alt='Pequena pizza' />
+          <Form onSubmit={handleSubmit}>
+            <input
+              type='email'
+              placeholder='Seu e-mail'
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
+            />
+            <input
+              type='password'
+              placeholder='Senha secreta'
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+            <button>Entrar</button>
+          </Form>
+        </Container>
+      </Wrapper>
+    );
 }
 
 const mapStateToProps = (state) => ({

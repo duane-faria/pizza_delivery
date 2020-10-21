@@ -1,16 +1,14 @@
-let tokenKey = 'token';
+import { store } from '../store/index';
+import AuthActions from '../store/ducks/Auth';
 
 export function getToken() {
-  const token = localStorage.getItem(tokenKey);
-  return token ? `Bearer ${localStorage.getItem(tokenKey)}` : false;
+  let { Auth } = store.getState();
+  if (Auth && Auth.token && Auth.token.length > 0) {
+    return `Bearer ${Auth.token}`;
+  }
+  return false;
 }
 
 export function logOut() {
-  /*eslint-disable*/
-  localStorage.removeItem(tokenKey);
-  location.reload();
-}
-
-export function setToken(token) {
-  localStorage.setItem(tokenKey, token);
+  store.dispatch(AuthActions.logout());
 }

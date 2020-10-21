@@ -141,7 +141,7 @@ const OrderBox = styled.div`
   border-radius: 5px;
   display: flex;
   align-items: center;
-
+  margin-right:.5rem;
   img {
     max-height: 100%;
   }

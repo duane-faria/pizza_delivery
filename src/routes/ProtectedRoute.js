@@ -5,7 +5,7 @@ import { getToken } from '../services/auth';
 
 function ProtectedRoute(props) {
   const login = getToken();
-  if (login) {
+  if (login != false) {
     return <Route {...props} />;
   } else {
     return <Redirect to='/' />;
