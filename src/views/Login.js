@@ -7,13 +7,28 @@ import AuthActions from '../store/ducks/Auth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getToken } from '../services/auth';
+import { useToasts } from 'react-toast-notifications';
 
 function Login(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [emailError, setEmailError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
+
+  function validate(target, setData) {
+    if (!target.value.length) {
+      setData(true);
+      return false;
+    } else {
+      setData(false);
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (emailError || passwordError) {
+      return;
+    }
     props.dispatch(
       AuthActions.loginRequest({
         email,
@@ -29,18 +44,28 @@ function Login(props) {
         <Container>
           <img src={shotPizza} alt='Pequena pizza' />
           <Form onSubmit={handleSubmit}>
-            <input
+            <Input
               type='email'
               placeholder='Seu e-mail'
               value={email}
-              onChange={({ target }) => setEmail(target.value)}
+              onChange={({ target }) => {
+                validate(target, setEmailError);
+                setEmail(target.value);
+              }}
+              onBlur={({ target }) => validate(target, setEmailError)}
             />
-            <input
+            {emailError && <ErrorMessage>Preencha o e-mail</ErrorMessage>}
+            <Input
               type='password'
               placeholder='Senha secreta'
               value={password}
-              onChange={({ target }) => setPassword(target.value)}
+              onChange={({ target }) => {
+                validate(target, setPasswordError);
+                setPassword(target.value);
+              }}
+              onBlur={({ target }) => validate(target, setPasswordError)}
             />
+            {passwordError && <ErrorMessage>Preencha a senha</ErrorMessage>}
             <button>Entrar</button>
           </Form>
         </Container>
@@ -76,24 +101,39 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Input = styled.input.attrs((props) => {
+  if (props.error) {
+    return {
+      placeholderTextColor: '#fff',
+    };
+  }
+})`
+  font-size: 15px;
+  color: #999999;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  height: 45px;
+  padding-left: 10px;
+  ${(props) => {
+    if (props.error) {
+      return `
+      background:tomato;
+      color:white;
+      `;
+    }
+  }}
+  &:hover,
+  &:focus {
+    border: 1px solid #e5293e;
+    box-shadow: 0 0 0 3px rgba(229, 41, 62, 0.35);
+    outline: none;
+  }
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 350px;
-  input {
-    font-size: 15px;
-    color: #999999;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    height: 45px;
-    padding-left: 10px;
-    &:hover,
-    &:focus {
-      border: 1px solid #e5293e;
-      box-shadow: 0 0 0 3px rgba(229, 41, 62, 0.35);
-      outline: none;
-    }
-  }
 
   button {
     background: #e5293e;
@@ -108,4 +148,10 @@ const Form = styled.form`
     color: #ffffff;
     letter-spacing: 0;
   }
+`;
+
+const ErrorMessage = styled.small`
+  color: red;
+  margin-top: -5px;
+  margin-bottom: 15px;
 `;
