@@ -14,6 +14,7 @@ function Login(props) {
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState(false);
+  const { addToast } = useToasts();
 
   function validate(target, setData) {
     if (!target.value.length) {
@@ -30,10 +31,14 @@ function Login(props) {
       return;
     }
     props.dispatch(
-      AuthActions.loginRequest({
-        email,
-        password,
-      })
+      AuthActions.loginRequest(
+        {
+          email,
+          password,
+        },
+        () =>
+          addToast('Login ou senha incorretos', { appearance: 'error', autoDismiss: true })
+      )
     );
   }
 
