@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components';
 import Header from '../components/Header';
 import OrderCard from '../components/OrderCard';
 import OrderActions from '../store/ducks/Order';
+import socketIOClient from 'socket.io-client';
+import { baseURL } from '../services/api';
 
 function Orders({ dispatch, order }) {
   React.useEffect(() => {
@@ -11,6 +13,14 @@ function Orders({ dispatch, order }) {
       await dispatch(OrderActions.loadRequest());
     }
     data();
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    const socket = socketIOClient(baseURL);
+    socket.on('message', async (data) => {
+      console.log(data);
+      await dispatch(OrderActions.loadRequest());
+    });
   }, [dispatch]);
 
   return (
@@ -24,7 +34,11 @@ function Orders({ dispatch, order }) {
           {order.data.docs &&
             order.data.docs.map((orderr, index) => {
               return (
-                <OrderCard order={orderr} index={index} key={orderr._id} />
+                <OrderCard
+                  order={orderr}
+                  index={orderr.orderNumber}
+                  key={orderr._id}
+                />
               );
             })}
         </Content>

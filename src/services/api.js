@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { getToken, logOut } from './auth';
 
+export const baseURL = 'http://localhost:3000/';
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL,
 });
 
 api.interceptors.request.use(

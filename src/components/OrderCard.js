@@ -9,15 +9,14 @@ import portuguesa from '../assets/images/portuguesa.png';
 import brocolis from '../assets/images/brocolis.png';
 
 function OrderCard({ order, index }) {
-  
   const images = {
     calabresa,
     pepperoni,
     atum,
     queijo,
     portuguesa,
-    brocolis
-  }
+    brocolis,
+  };
 
   function formatOrderDate(date) {
     let diffminutes = differenceInMinutes(
@@ -41,7 +40,7 @@ function OrderCard({ order, index }) {
     <Container>
       <Header>
         <OrderTitle>
-          Pedido <span>#{index + 1}</span> - {order.user.name}
+          Pedido <span>#{index}</span> - {order.user.name}
         </OrderTitle>
         <Time>{formatOrderDate(order.createdAt)}</Time>
         <OrderPrice>R$ {order.price}</OrderPrice>
@@ -49,7 +48,6 @@ function OrderCard({ order, index }) {
       <Line />
       <Orders>
         {order.items.map((o, i) => {
-          
           return (
             <OrderBox key={i}>
               <img src={images[o.productType.name.toLowerCase()]} alt='Pizza' />
@@ -58,9 +56,7 @@ function OrderCard({ order, index }) {
                   {o.product.name.toLowerCase() == 'pizza'
                     ? o.product.name + ' de '
                     : o.product.name}
-                    {
-                      o.productType.name
-                    }
+                  {o.productType.name}
                 </h4>
                 <small>Tamanho {o.productSize.name}</small>
               </div>
@@ -141,7 +137,7 @@ const OrderBox = styled.div`
   border-radius: 5px;
   display: flex;
   align-items: center;
-  margin-right:.5rem;
+  margin-right: 0.5rem;
   img {
     max-height: 100%;
   }
