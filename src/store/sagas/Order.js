@@ -12,3 +12,17 @@ export function* load() {
     yield put(OrderActios.loadFailure());
   }
 }
+
+export function* updateStatus({ data }) {
+  console.log(data);
+  const { id, status } = data;
+  try {
+    const response = yield call(api.put, `order/${id}`, { status });
+    console.log('====================================');
+    console.log(response);
+    console.log('====================================');
+    // yield put(AuthActios.loginSuccess(response.data));
+  } catch (e) {
+    // yield put(AuthActios.loginFailure());
+  }
+}

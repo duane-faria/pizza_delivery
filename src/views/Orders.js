@@ -23,6 +23,10 @@ function Orders({ dispatch, order }) {
     });
   }, [dispatch]);
 
+  function handleOrderStage(data) {
+    dispatch(OrderActions.updateStageRequest(data));
+  }
+
   return (
     <>
       <Header />
@@ -38,6 +42,7 @@ function Orders({ dispatch, order }) {
                   order={orderr}
                   index={orderr.orderNumber}
                   key={orderr._id}
+                  handleOrderStage={handleOrderStage}
                 />
               );
             })}

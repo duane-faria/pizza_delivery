@@ -8,7 +8,7 @@ import queijo from '../assets/images/queijo.png';
 import portuguesa from '../assets/images/portuguesa.png';
 import brocolis from '../assets/images/brocolis.png';
 
-function OrderCard({ order, index }) {
+function OrderCard({ order, index, handleOrderStage }) {
   const images = {
     calabresa,
     pepperoni,
@@ -66,6 +66,23 @@ function OrderCard({ order, index }) {
       </Orders>
       <Line />
       <Observations>Observações: {order.note}</Observations>
+      <Line />
+      <ButtonContainer>
+        <Button
+          color='#7bae51'
+          hover='#4e6e33'
+          onClick={() => handleOrderStage({ id: order._id, status: 'preparo' })}
+        >
+          preparo
+        </Button>
+        <Button
+          color='#2866b4'
+          hover='#194072'
+          onClick={() => handleOrderStage({ id: order._id, status: 'entrega' })}
+        >
+          entrega
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }
@@ -82,7 +99,7 @@ const Orders = styled.div`
 
 const Container = styled.div`
   margin: 0 auto;
-  max-height: 270px;
+  max-height: 320px;
   max-width: 650px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   background: white;
@@ -176,7 +193,8 @@ const Observations = styled.div`
   color: #706e7b;
   letter-spacing: 0;
   text-align: left;
-  padding-top: 5px;
+  padding-top: 10px;
+  margin-bottom: 20px;
 `;
 
 const Line = styled.div`
@@ -185,4 +203,24 @@ const Line = styled.div`
   background: #f2eeee;
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const Button = styled.div`
+  background: ${(props) => props.color || '#e5293e'};
+  color: #fff;
+  padding: 5px 35px;
+  margin: 10px 20px 0 0;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.hover || '#ab1425'};
+  }
+  font-size: 15px;
+  color: #ffffff;
+  letter-spacing: 0;
 `;
