@@ -42,7 +42,7 @@ function OrderCard({ order, index, handleOrderStage }) {
         <OrderTitle>
           Pedido <span>#{index}</span> - {order.user.name}
         </OrderTitle>
-        <Time>{formatOrderDate(order.createdAt)}</Time>
+        <Time>{order.time}</Time>
         <OrderPrice>R$ {order.price}</OrderPrice>
       </Header>
       <Line />
@@ -50,15 +50,19 @@ function OrderCard({ order, index, handleOrderStage }) {
         {order.items.map((o, i) => {
           return (
             <OrderBox key={i}>
-              <img src={images[o.productType.name.toLowerCase()]} alt='Pizza' />
+              {o.productType && (
+                <img
+                  src={images[o.productType.name.toLowerCase()]}
+                  alt='Pizza'
+                />
+              )}
               <div>
                 <h4>
-                  {o.product.name.toLowerCase() == 'pizza'
-                    ? o.product.name + ' de '
-                    : o.product.name}
-                  {o.productType.name}
+                  {o.product &&
+                    o.productType &&
+                    o.product.name + ' de ' + o.productType.name}
                 </h4>
-                <small>Tamanho {o.productSize.name}</small>
+                <small>Tamanho {o.productSize && o.productSize.name}</small>
               </div>
             </OrderBox>
           );
